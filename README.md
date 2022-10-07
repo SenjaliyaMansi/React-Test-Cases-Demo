@@ -22,6 +22,9 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 
+### `yarn run test:all --coverage`
+
+Lunches the test runner in interactive watch mode and also check the coverage of the app
 
 ### `yarn run build` OR `npm run build`
 

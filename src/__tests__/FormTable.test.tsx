@@ -1,17 +1,9 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { createRenderer } from 'react-test-renderer/shallow';
 import FormTable from '../FormTable';
 import { act } from 'react-test-renderer';
 
 const renderer = createRenderer();
-
-const userDetails = {
-  FirstName: 'Test',
-  LastName: 'User',
-  Password: 'Test@1234',
-  ConfirmPassword: 'Test@1234',
-  Email: 'test@gmail.com',
-};
 
 const defaultComponent = <FormTable />;
 
@@ -109,19 +101,5 @@ describe('<App />', () => {
     });
 
     expect(getByTestId('emailAddress')).toBeTruthy();
-  });
-
-  it('Display value on submit button', async () => {
-    const { getByTestId } = render(defaultComponent);
-    const submitButton = getByTestId('submit-target-btn');
-
-    await act(async () => {
-      fireEvent.click(submitButton);
-    });
-
-     await waitFor(() =>{
-      expect(getByTestId('firstName')).toHaveTextContent(`${userDetails.FirstName}`);
-    })
-   
   });
 });

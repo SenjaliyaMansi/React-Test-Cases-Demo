@@ -73,7 +73,7 @@ const FormTable = () => {
             <Form className="frm p-4 text-left">
               <h3>SignUp Form</h3>
               <div className="main-cont">
-                <div className="form-group" >
+                <div className="form-group">
                   <label>First Name</label>
                   <Field
                     data-testid="firstName"
