@@ -19,23 +19,23 @@ describe('<App />', () => {
     expect(getByTestId('sign-up-form')).toBeTruthy();
   });
 
-  it('submit button is clickable', async () => {
+  it('Register button is clickable', async () => {
     const { getByTestId } = render(defaultComponent);
-    const submit = getByTestId('submit-target-btn');
+    const RegisterButton = getByTestId('Register-target-btn');
 
     await act(async () => {
-      fireEvent.click(submit);
+      fireEvent.click(RegisterButton);
     });
 
-    expect(getByTestId('submit-target-btn')).toBeVisible();
+    expect(getByTestId('Register-target-btn')).toBeVisible();
   });
 
   it('A valid form data submit', async () => {
     const { getByTestId } = render(defaultComponent);
-    const submitButton = getByTestId('submit-target-btn');
+    const RegisterButton = getByTestId('Register-target-btn');
 
     await act(async () => {
-      fireEvent.click(submitButton);
+      fireEvent.click(RegisterButton);
     });
 
     expect(getByTestId('firstName')).toBeInTheDocument();
@@ -45,12 +45,12 @@ describe('<App />', () => {
     expect(getByTestId('confirmPassword')).toBeInTheDocument();
   });
 
-  it('A validation message on form data submit', async () => {
+  it('A validation message on form data Register', async () => {
     const { getByTestId } = render(defaultComponent);
-    const submitButton = getByTestId('submit-target-btn');
+    const RegisterButton = getByTestId('Register-target-btn');
 
     await act(async () => {
-      fireEvent.click(submitButton);
+      fireEvent.click(RegisterButton);
     });
 
     expect(getByTestId('error-firstName')).toHaveTextContent(
@@ -68,28 +68,9 @@ describe('<App />', () => {
     expect(getByTestId('error-email')).toHaveTextContent('Email is required');
   });
 
-  it('form data value on submit button click', async () => {
-    const { getByTestId } = render(defaultComponent);
-    const submitButton = getByTestId('submit-target-btn');
-
-    await act(async () => {
-      fireEvent.click(submitButton);
-    });
-
-    expect(getByTestId('userDetails-firstName')).toBeInTheDocument();
-
-    expect(getByTestId('userDetails-lastName')).toBeInTheDocument();
-
-    expect(getByTestId('userDetails-password')).toBeInTheDocument();
-
-    expect(getByTestId('userDetails-confirmPassword')).toBeInTheDocument();
-
-    expect(getByTestId('userDetails-email')).toBeInTheDocument();
-  });
-
   it('Check the email value', async () => {
     const { getByTestId } = render(defaultComponent);
-    const submitButton = getByTestId('submit-target-btn');
+    const RegisterButton = getByTestId('Register-target-btn');
     const emailField = screen.getByTestId('emailAddress');
 
     await act(async () => {
@@ -97,7 +78,7 @@ describe('<App />', () => {
         target: { value: 'test00hfhdhhfgmailco' },
       });
 
-      submitButton.dispatchEvent(new Event('submit'));
+      RegisterButton.dispatchEvent(new Event('submit'));
     });
 
     expect(getByTestId('emailAddress')).toBeTruthy();

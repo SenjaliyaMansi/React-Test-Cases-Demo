@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import './FormTable.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-import { Card } from 'react-bootstrap';
+import './FormTable.css';
 
 interface Values {
   firstName: string;
@@ -15,14 +13,6 @@ interface Values {
 }
 
 const FormTable = () => {
-  const [userDetails, setUserDetails] = useState<Values>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
-
   const validateEmail = (value: any) => {
     let error;
     if (!value) {
@@ -53,8 +43,9 @@ const FormTable = () => {
       .required('Confirm Password is required')
       .oneOf([Yup.ref('password'), null], 'Your Password does not match'),
   });
+
   return (
-    <div className="register-form" data-testid="sign-up-form">
+    <div data-testid="sign-up-form">
       <Formik
         initialValues={{
           firstName: '',
@@ -65,146 +56,179 @@ const FormTable = () => {
         }}
         validationSchema={SignUpSchema}
         onSubmit={(values: Values) => {
-          setUserDetails(values);
+          console.log('values', values);
         }}
       >
         {({ errors, touched, values }) => (
           <>
-            <Form className="frm p-4 text-left">
-              <h3>SignUp Form</h3>
-              <div className="main-cont">
-                <div className="form-group">
-                  <label>First Name</label>
-                  <Field
-                    data-testid="firstName"
-                    name="firstName"
-                    type="text"
-                    className="form-control pl-2"
-                    placeholder="First Name"
-                    value={values.firstName}
-                  />
-                </div>
-                {errors.firstName && touched.firstName && (
-                  <div className="text-danger" data-testid="error-firstName">
-                    {errors.firstName}
-                  </div>
-                )}
-                <div className="form-group" data-testid="lastName">
-                  <label>Last Name</label>
-                  <Field
-                    name="lastName"
-                    type="text"
-                    className="form-control pl-2"
-                    placeholder="Last Name"
-                    value={values.lastName}
-                  />
-                </div>
-                {errors.lastName && touched.lastName && (
-                  <div className="text-danger" data-testid="error-lastName">
-                    {errors.lastName}
-                  </div>
-                )}
-                <div className="form-group" data-testid="password">
-                  <label>Password</label>
-                  <Field
-                    name="password"
-                    type="password"
-                    className="form-control pl-2"
-                    value={values.password}
-                  />
-                </div>
-                {errors.password && touched.password && (
-                  <div className="text-danger" data-testid="error-password">
-                    {errors.password}
-                  </div>
-                )}
-                <div className="form-group" data-testid="confirmPassword">
-                  <label>Confirm Password</label>
-                  <Field
-                    autoComplete="on"
-                    name="confirmPassword"
-                    type="password"
-                    className="form-control pl-2"
-                    value={values.confirmPassword}
-                  />
-                </div>
-                {errors.confirmPassword && touched.confirmPassword && (
+            <section>
+              <div className="mask d-flex align-items-center h-100 gradient-custom-3">
+                <div className="container h-100">
                   <div
-                    className="text-danger"
-                    data-testid="error-confirmPassword"
+                    className="row d-flex justify-content-center align-items-center h-100"
+                    style={{ marginTop: '55px', marginBottom: '55px' }}
                   >
-                    {errors.confirmPassword}
+                    <div className="col-12 col-md-9 col-lg-7 col-xl-6">
+                      <div className="card" style={{ borderRadius: '15px' }}>
+                        <div className="card-body p-5">
+                          <h2 className="text-uppercase text-center mb-5">
+                            Create an account
+                          </h2>
+                          <Form>
+                            <div
+                              className="form-outline mb-4"
+                              data-testid="firstName"
+                            >
+                              <label className="mb-2">First Name</label>
+                              <Field
+                                name="firstName"
+                                type="text"
+                                className="form-control pl-2"
+                                placeholder="First Name"
+                                value={values.firstName}
+                              />
+                              {errors.firstName && touched.firstName && (
+                                <div
+                                  className="text-danger"
+                                  data-testid="error-firstName"
+                                >
+                                  {errors.firstName}
+                                </div>
+                              )}
+                            </div>
+                            <div
+                              className="form-outline mb-4"
+                              data-testid="lastName"
+                            >
+                              <label className="mb-2">Last Name</label>
+                              <Field
+                                name="lastName"
+                                type="text"
+                                className="form-control pl-2"
+                                placeholder="Last Name"
+                                value={values.lastName}
+                              />
+
+                              {errors.lastName && touched.lastName && (
+                                <div
+                                  className="text-danger"
+                                  data-testid="error-lastName"
+                                >
+                                  {errors.lastName}
+                                </div>
+                              )}
+                            </div>
+
+                            <div
+                              className="form-outline mb-4"
+                              data-testid="password"
+                            >
+                              <label className="mb-2">Password</label>
+                              <Field
+                                name="password"
+                                type="password"
+                                className="form-control pl-2"
+                                value={values.password}
+                              />
+                              {errors.password && touched.password && (
+                                <div
+                                  className="text-danger"
+                                  data-testid="error-password"
+                                >
+                                  {errors.password}
+                                </div>
+                              )}
+                            </div>
+
+                            <div
+                              className="form-outline mb-4"
+                              data-testid="confirmPassword"
+                            >
+                              <label className="mb-2">Confirm Password</label>
+                              <Field
+                                autoComplete="on"
+                                name="confirmPassword"
+                                type="password"
+                                className="form-control pl-2"
+                                value={values.confirmPassword}
+                              />
+                              {errors.confirmPassword &&
+                                touched.confirmPassword && (
+                                  <div
+                                    className="text-danger"
+                                    data-testid="error-confirmPassword"
+                                  >
+                                    {errors.confirmPassword}
+                                  </div>
+                                )}
+                            </div>
+
+                            <div
+                              className="form-outline mb-4"
+                              data-testid="email"
+                            >
+                              <label className="mb-2"> Email </label>
+                              <Field
+                                name="email"
+                                type="email"
+                                value={values.email}
+                                data-testid="emailAddress"
+                                validate={validateEmail}
+                                placeholder="john@example.com"
+                                className="form-control pl-2"
+                              />
+                              {errors.email && touched.email && (
+                                <div
+                                  className="text-danger"
+                                  data-testid="error-email"
+                                >
+                                  {errors.email}
+                                </div>
+                              )}
+                            </div>
+
+                            <div className="form-check d-flex justify-content-center mb-5">
+                              <input
+                                className="form-check-input me-2"
+                                type="checkbox"
+                                value=""
+                                id="form2Example3cg"
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="form2Example3g"
+                              >
+                                I agree all statements in{' '}
+                                <a href="#!" className="text-body">
+                                  <u>Terms of service</u>
+                                </a>
+                              </label>
+                            </div>
+
+                            <div className="d-flex justify-content-center">
+                              <button
+                                type="submit"
+                                data-testid="Register-target-btn"
+                                className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                              >
+                                Register
+                              </button>
+                            </div>
+
+                            <p className="text-center text-muted mt-5 mb-0">
+                              Have already an account?{' '}
+                              <a href="#!" className="fw-bold text-body">
+                                <u>Login here</u>
+                              </a>
+                            </p>
+                          </Form>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                )}
-                <div className="form-group" data-testid="email">
-                  <label> Email </label>
-                  <Field
-                    name="email"
-                    type="email"
-                    value={values.email}
-                    data-testid="emailAddress"
-                    validate={validateEmail}
-                    placeholder="john@example.com"
-                    className="form-control pl-2"
-                  />
                 </div>
-                {errors.email && touched.email && (
-                  <div className="text-danger" data-testid="error-email">
-                    {errors.email}
-                  </div>
-                )}
-                <Button
-                  data-testid="submit-target-btn"
-                  className="btns"
-                  type="submit"
-                  size="sm"
-                  variant="success"
-                >
-                  Submit
-                </Button>
               </div>
-            </Form>
-            {userDetails && (
-              <Card border="success" className="mb-5 mt-2 w-25 cards">
-                <p>
-                  {' '}
-                  First Name :{' '}
-                  <span data-testid="userDetails-firstName">
-                    {userDetails.firstName}
-                  </span>{' '}
-                </p>
-                <p>
-                  {' '}
-                  Last Name :
-                  <span data-testid="userDetails-lastName">
-                    {userDetails.lastName}
-                  </span>{' '}
-                </p>
-                <p>
-                  {' '}
-                  Password :
-                  <span data-testid="userDetails-password">
-                    {' '}
-                    {userDetails.password}{' '}
-                  </span>
-                </p>
-                <p>
-                  {' '}
-                  Confirm password :{' '}
-                  <span data-testid="userDetails-confirmPassword">
-                    {userDetails.confirmPassword}{' '}
-                  </span>
-                </p>
-                <p>
-                  {' '}
-                  Email :
-                  <span data-testid="userDetails-email">
-                    {' '}
-                    {userDetails.email}{' '}
-                  </span>
-                </p>
-              </Card>
-            )}
+            </section>
           </>
         )}
       </Formik>

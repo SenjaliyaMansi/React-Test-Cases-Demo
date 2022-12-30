@@ -53,5 +53,15 @@
       "src/index.tsx",
       "src/reportWebVitals.ts"
     ]
+  },
+  "resolutions": {
+    "ansi-regex": "^3.0.1",
+    "glob-parent": "^6.0.1",
+    "loader-utils": "^2.0.3",
+    "minimatch": "^3.0.5",
+    "nth-check": "^2.1.1",
+    "unset-value": "^2.0.1",
+    "@xmldom/xmldom": "^0.8.4",
+    "json5": "^2.2.2"
   }
 }
